@@ -81,6 +81,7 @@ export class SpecGenerator2 extends SpecGenerator {
     Object.keys(this.metadata.referenceTypeMap).map(typeName => {
       const referenceType = this.metadata.referenceTypeMap[typeName];
       if (referenceType.dataType === 'refObject') {
+        if(!referenceType.properties) referenceType.properties = [];
         const required = referenceType.properties.filter(p => p.required && !this.hasUndefined(p)).map(p => p.name);
         definitions[referenceType.refName] = {
           description: referenceType.description,
